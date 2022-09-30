@@ -1,0 +1,97 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Goal Detail {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    .card-body:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <main class="col-sm col border-start ps-md-2 pt-2">
+                {% comment %} <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="fa fa-navicon fa-lg py-2 p-1"></i> Menu</a> {% endcomment %}
+                
+                <div class="row">
+                    {% comment %} back to home button {% endcomment %}
+                    <div class="col-3">
+                        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary mb-1">
+                            <svg class="icon icon-xs" fill="primary" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd">
+                                </path>
+                            </svg>
+                            Back
+                        </a>
+                    </div>
+                    <div class="col-12 mb-1">
+                        {% comment %} Country Name and Flag {% endcomment %}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <h2 class="card-text">{{ country.country_name }}</h2>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {% comment %} <h5 class="card-title">Country Flag</h5> {% endcomment %}
+                                <p class="float-md-end">
+                                    <img src="../../media/{{country.flag}}" alt="Flag-{{ country.country_name }}"
+                                    width="140px" height="70px" class="img-fluid">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% comment %} SDG Details {% endcomment %}
+                    <div class="col-12">
+                        <h3 class="card-title">SDG Details</h3>
+                        {% comment %} content on left and right {% endcomment %}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="col-12">
+                                    <p class="card-text">{{ sdg.name }}</p>
+                                    <p class="card-text">SDG Description: {{ sdg.description }}</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="row-6">
+                                    <p class="float-md-end">
+                                        <img src="../../media/{{sdg.image}}" alt="{{ sdg.name }}"
+                                        width="140px" height="70px" class="img-fluid">
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% comment %} SDG Indicators {% endcomment %}
+                    <div class="col-12">
+                        {% if indicators %}
+                            <h3 class="card-title">SDG Indicators</h3>
+                            <div class="row col-md-12">
+                                {% for indicator in indicators %}
+                                    <div class="col-md-3">
+                                        <a href="{% url 'performance_detail' sdg.id indicator.id %}" class="card-link">
+                                            <div class="card mb-3" style="max-width: 540px;">
+                                                <div class="card-body">
+                                                    <p>{{ indicator.indicator_name|truncatechars:70 }}</p>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <h3 class="card-title">No Indicators</h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+{% endblock javascripts %}

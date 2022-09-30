@@ -1,0 +1,131 @@
+[
+    {
+      "model":"main.goal",
+      "pk":1,
+      "fields":{
+         "goal_name":"End poverty in all its forms everywhere",
+         "goal_country":1,
+         "recorded_by":1,
+         "created_at":"2022-08-30T09:09:02.958Z",
+         "updated_at":"2022-08-30T09:09:02.958Z"
+      }
+    },
+    {
+        "model":"main.goal",
+        "pk":2,
+        "fields":{
+           "goal_name":"End hunger, achieve food security and improved nutrition and promote sustainable agriculture",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+    {
+        "model":"main.goal",
+        "pk":3,
+        "fields":{
+           "goal_name":"Ensure healthy lives and promote well-being for all at all ages",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+    {
+        "model":"main.goal",
+        "pk":4,
+        "fields":{
+           "goal_name":"Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+    {
+        "model":"main.goal",
+        "pk":5,
+        "fields":{
+           "goal_name":"Achieve gender equality and empower all women and girls",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+    {
+        "model":"main.goal",
+        "pk":6,
+        "fields":{
+           "goal_name":"Ensure availability and sustainable management of water and sanitation for all",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+    {
+        "model":"main.goal",
+        "pk":7,
+        "fields":{
+           "goal_name":"Ensure access to affordable, reliable, sustainable and modern energy for all",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+    {
+        "model":"main.goal",
+        "pk":8,
+        "fields":{
+           "goal_name":"Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all",
+           "goal_country":1,
+           "recorded_by":1,
+           "created_at":"2022-08-30T09:09:02.958Z",
+           "updated_at":"2022-08-30T09:09:02.958Z"
+        }
+    },
+   {
+      "model":"main.indicator",
+      "pk":1,
+      "fields":{
+         "indicator_name":"Proportion of population below the international poverty line, by sex, age, employment status and geographical location (urban/rural)",
+         "indicator_description":"Estimated percentage of the population that is living under the poverty threshold of US$1.90 a day. Estimated using historical estimates of the income distribution, projections of population changes by age and educational attainment, and GDP projections.",
+         "indicator_goal":1,
+         "long_term_objective":"The long-term objective for this indicator is a value of 0.",
+         "recorded_by":1,
+         "created_at":"2022-09-17T08:07:40.499Z",
+         "updated_at":"2022-09-17T08:07:40.499Z"
+      }
+   },
+   {
+      "model":"main.performance",
+      "pk":1,
+      "fields":{
+         "indicator_id":1,
+         "year":2022,
+         "value":5.34,
+         "reference":"World Data Lab",
+         "source":"http://worldpoverty.io/",
+         "recorded_by":1,
+         "created_at":"2022-09-18T17:30:05.383Z",
+         "updated_at":"2022-09-18T17:30:05.383Z"
+      }
+   },
+   {
+      "model":"main.performance",
+      "pk":2,
+      "fields":{
+         "indicator_id":1,
+         "year":2021,
+         "value":10.65,
+         "reference":"WLR",
+         "source":"https://wlb.io",
+         "recorded_by":1,
+         "created_at":"2022-09-18T18:20:59.607Z",
+         "updated_at":"2022-09-18T18:20:59.607Z"
+      }
+   }
+]

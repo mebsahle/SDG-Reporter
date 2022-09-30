@@ -1,0 +1,22 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+
+# migration folder and files
+*/migrations/*
+!*/migrations/__init__.py
+# Pipenv dependencies
+Pipfile
+Pipfile.lock
+
+# Python environment
+*/env/*
+.env
+*.pyc
+*/media/*
+*/htmlcov/*
+
+
+*/authentication/migrations
+authentication/__pycache__# migration folder and files
+*/main/migrations
+main/__pycache__# migration folder and files

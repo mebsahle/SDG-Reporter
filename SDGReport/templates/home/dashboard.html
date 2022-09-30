@@ -1,0 +1,124 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dashboard {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <main class="col-sm col border-start ps-md-2 pt-2">
+                {% comment %} <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="fa fa-navicon fa-lg py-2 p-1"></i> Menu</a> {% endcomment %}
+                    {% if country %}
+                        <div class="row">
+                            <div class="col-12 mb-4">
+                                {% comment %} Country Name and Flag {% endcomment %}
+                                <div class="row">
+                                    <div class="col-12 col-md-6">
+                                        <h2 class="card-text">{{ country.country_name }}</h2>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        {% comment %} <h5 class="card-title">Country Flag</h5> {% endcomment %}
+                                        <p class="float-md-end">
+                                            <img src="../../media/{{country.flag}}" alt="{{ country.country_name }}"
+                                            width="140px" height="70px" class="img-fluid">
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="container">
+                                {% comment %} Country Statistics {% endcomment %}
+                                <h3>SDG Dashboards and Trends</h3>
+                                <p style="color:gray;">Click on a goal to view more information.</p>
+                                {% comment %} create 17 small cards with flex {% endcomment %}
+                                {% comment %} create a bootstrap 5 grid with space between {% endcomment %}
+
+                                <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+                                    {% for goal in goals %}
+                                        <a href="{% url 'goal_detail' goal.pk %}">
+                                            <div class="p-2 border bg-dark" style="background-color: #dddddd">
+                                                <img width="120px" height="130px" src="{{ goal.image }}" alt="{{ goal.name }}" />
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        {% comment %} create a form to create country {% endcomment %}
+                        <div class="row">
+                            <div class="col-12">
+                                <h2 class="card-text">Create a Country</h2>
+                            </div>
+                            <div class="col-12">
+                                {% comment %} form with upload file type {% endcomment %}
+                                {% comment %} add card as abackground and make the form center {% endcomment %}
+                                <div class="card">
+                                    <div class="card-body">
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="form-group">
+                                                <label for="country_name">Country Name</label>
+                                                <input type="text" class="form-control" id="country_name" name="country_name" placeholder="Enter Country Name">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="flag">Country Flag</label>
+                                                <input type="file" class="form-control" id="flag" name="flag">
+                                            </div>
+                                            <br>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% comment %} </a> {% endcomment %}
+            </main>
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+{% comment %} show the clicked item id on the sidebar {% endcomment %}
+<script>
+    /*function myFunction(goal) {
+        alert(goal.id);
+    }*/
+    function myFunc(id) {
+        {% comment %} alert(id); {% endcomment %}
+        console.log("bzzz",id);
+        var price = document.getElementById("price" + id);
+        var food = document.getElementById("foodName_1" + id);
+        console.log(food);
+        console.log(price);
+       }
+</script>
+    
+{% endblock javascripts %}
+
+{% block stylesheets %}
+    <style>
+        .icon-shape {
+            width: 3.5rem;
+            height: 3.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        .icon-shape-primary {
+            background-color: #e8f0fe;
+            color: #5e72e4;
+        }
+        .icon-shape-secondary {
+            background-color: #f7fafc;
+            color: #2dce89;
+        }
+        .icon-shape-tertiary {
+            background-color: #f4f5f7;
+            color: #11cdef;
+        }
+    </style>
+{% endblock %}

@@ -1,0 +1,72 @@
+name: SDGReportTest
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    branches:
+      - main
+
+# on: 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_DB: "sdg"
+          POSTGRES_USER: "sdguser"
+          POSTGRES_PASSWORD: "sdg@17"
+        # needed because the postgres container does not provide a healthcheck
+        options: >-
+          --health-cmd pg_isready 
+          --health-interval 10s 
+          --health-timeout 5s 
+          --health-retries 5
+        ports:
+          - "5432:5432"
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Python 3.8
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.8"
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get install python3
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
+    # - name: Lint with flake8
+    #   run: | 
+    #     pip install flake8
+    #     flake8
+
+    - name: Coverage report
+      run: | 
+        pip install coverage
+        cd SDGReport
+        coverage run manage.py test
+        coverage report
+    - name: SDGReportTest
+      run: |
+        cd SDGReport
+        python3 manage.py makemigrations
+        python3 manage.py migrate
+      env:
+        ENGINE: "django.db.backends.postgresql"
+        NAME: "sdg"
+        DB_USER: "sdguser"
+        PASSWORD: "sdg@17"
+        HOST: "localhost"
+        PORT: 5432
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DEBUG: "False"

@@ -1,0 +1,100 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Performance Detail {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+    .card-body:hover {
+        background-color: #f5f5f5;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row flex-nowrap">
+            <main class="col-sm col border-start ps-md-2 pt-2">
+                {% comment %} <a href="#" data-bs-target="#sidebar" data-bs-toggle="collapse" class="border rounded-3 p-1 text-decoration-none"><i class="fa fa-navicon fa-lg py-2 p-1"></i> Menu</a> {% endcomment %}
+                
+                <div class="row">
+                     {% comment %} back to home button {% endcomment %}
+                     <div class="col-3">
+                        <a href="{% url 'home' %}" class="btn btn-sm btn-outline-primary mb-1">
+                            <svg class="icon icon-xs" fill="primary" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd">
+                                </path>
+                            </svg>
+                            Back
+                        </a>
+                    </div>
+                    <div class="col-12 mb-1">
+                        {% comment %} Country Name and Flag {% endcomment %}
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <h2 class="card-text">{{ country.country_name }}</h2>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                {% comment %} <h5 class="card-title">Country Flag</h5> {% endcomment %}
+                                <p class="float-md-end">
+                                    <img src="../../../media/{{country.flag}}" alt="Flag-{{ country.country_name }}"
+                                    width="140px" height="70px" class="img-fluid">
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% comment %} performance detail {% endcomment %}
+                    {% comment %} value, year, edscription, long-term objective as elements {% endcomment %}
+                    <div class="col-12">
+                        <h3>Performance Create</h3>
+                    </div>
+                    <div class="col-4">
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        <label for="year">Year</label>
+                                        <select class="form-select" id="year" name="year">
+                                            <option selected>Year</option>
+                                            {% for year in years %}
+                                                <option value="{{ year }}">{{ year }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <br>
+                                    <div class="form-group">
+                                        <label for="value">Value</label>
+                                        <input type="text" class="form-control" id="value" name="value" placeholder="Value">
+                                    </div>
+                                    <br>
+                                    {% comment %} reference {% endcomment %}
+                                    <div class="form-group">
+                                        <label for="reference">Reference</label>
+                                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Reference">
+                                    </div>
+                                    <br>
+                                    {% comment %} source {% endcomment %}
+                                    <div class="form-group">
+                                        <label for="source">Source</label>
+                                        <input type="text" class="form-control" id="source" name="source" placeholder="Source">
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-primary center">Save</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    <!--overridong the Chart js in base.html -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+{% endblock javascripts %}
