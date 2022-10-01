@@ -1,6 +1,6 @@
 # SDG-Reporter
 
-The app will generate report only for 1 year 
+The app will generate report only for years but will generate report for 1 year 
 - cloning the app
 - create database 
 - python manage.py makemigrations authentication main
