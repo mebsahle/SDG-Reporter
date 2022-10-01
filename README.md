@@ -1,8 +1,29 @@
 # SDG-Reporter
+The SDG Reporter app will generate report only for years but will generate report for 1 year 
 
-The app will generate report only for years but will generate report for 1 year 
+## Launch Development Server
+
+👋 Hey welcome to this readme, First the server needs to have Python 3 and Postgres 12.9 + installed. \
+create a postgres database using the following instruction. 
+> 'DatabaseNAME': 'sdr', \
+> 'USER': 'sdruser', \
+> 'PASSWORD': 'password', 
+
+Open terminal \
+
 - cloning the app
-- create database 
+- create postgres database 
+CREATE DATABASE sdr; \
+CREATE USER sdruser WITH PASSWORD 'password'; \
+ALTER ROLE sdruser SET client_encoding TO 'utf8'; \
+ALTER ROLE sdruser SET default_transaction_isolation TO 'read committed'; \
+ALTER ROLE sdruser SET timezone TO 'UTC'; \
+GRANT ALL PRIVILEGES ON DATABASE sdr TO sdruser; \
+psql -U sdruser -h localhost sdr \
+(☝🏾 postgres connect to database as user)
+\q
+exit
+
 - python manage.py makemigrations authentication main
 - python manage.py migrate
 - python manage.py createsuperuser
@@ -19,6 +40,19 @@ The app will generate report only for years but will generate report for 1 year
 Add Indicator (value, year, description, Long-Term Objective, Reference, Source)
 - click one indicator then see the data with chart
 - To generate report as pdf use Ctr + p
+
+🔐 So, these are the key features
+- SDG Yearly Data Management for a country
+- SDG Report Generation
+- Data Visualization
+
+🚀 You're now up and running. 
+## Access Control
+1. Go to localhost/admin and assign access for admin 
+2. go back to localhost:8000/ 
+
+👍🏾 Good Job.
+## What you see?
 ![image](https://user-images.githubusercontent.com/51055556/190931783-5fc71975-004e-42e5-aff1-8a5ea5d35fe5.png)
 ![image](https://user-images.githubusercontent.com/51055556/193348147-6c14cfd2-5f54-4bf7-8b88-fdddb4509ba1.png)
 ![image](https://user-images.githubusercontent.com/51055556/190931697-69919b71-3015-4cb9-8ca9-3d1036def628.png)
