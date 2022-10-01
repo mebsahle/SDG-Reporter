@@ -1,0 +1,446 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>
+       {% block title %}SDG Report-{{current_year}}{% endblock %}
+    </title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    {% block layout_style %}
+        <style> @page { size: letter landscape; margin: 50px; } </style>
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+            td, th {
+                border: 1px solid Black;
+                padding: 5px 15px;
+            }
+            thead {
+                text-align: center;
+                font-weight: bold;
+            }
+            .sdg {
+                font-weight:bold; 
+                font-size:125%;
+                color:#fff;
+            }
+            .output {
+                font-size: small; 
+                font-family: Georgia, 'Times New Roman';
+                margin: auto;
+                width: 100%;
+            }
+            .signature {
+                display:flex; 
+                justify-content: space-around;
+            }
+        </style>
+    {% endblock %}
+</head>
+<body>
+    <div class="output row justify-content-center">
+
+        <h3 style = "text-align:center">Sustainable Development Goal Report - {{ current_year }}</h3>
+        {% block content %}
+                                        
+        
+        <table style = "border: 1px solid black;">
+            <thead>
+                <tr>
+                    <td rowspan="2">Indicator Reference</td>
+                    <td rowspan="2">Goals and Indicators</td>
+                    <td colspan="{{len_years}}">Performance</td>
+                </tr>
+                <tr>
+                    {% for year in years %}
+                        <td>{{ year }}</td>
+                    {% endfor %}
+                </tr>
+            </thead>
+                                
+            <tbody>
+                {% comment %} SDG 1 {% endcomment %}
+                <tr class="sdg" style="background-color: #EB1C2C;">
+                    <td>SDG 1</td>
+                    <td>End poverty in all its forms everywhere</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_1 %}
+                    <tr>
+                        <td>SDGs 1.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_1 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 2 {% endcomment %}
+                <tr class="sdg" style="background-color: #D19F28;">
+                    <td>SDG 2</td>
+                    <td>End hunger, achieve food security and improved nutrition and promote sustainable agriculture</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_2 %}
+                    <tr>
+                        <td>SDGs 2.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_2 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 3 {% endcomment %}
+                <tr class="sdg" style="background-color: #269B47;">
+                    <td>SDG 3</td>
+                    <td>Ensure healthy lives and promote well-being for all at all ages</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_3 %}
+                    <tr>
+                        <td>SDGs 3.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_3 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 4 {% endcomment %}
+                <tr class="sdg" style="background-color: #C21F32;">
+                    <td>SDG 4</td>
+                    <td>Ensure inclusive and equitable quality education and promote lifelong learning opportunities for all</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_4 %}
+                    <tr>
+                        <td>SDGs 4.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_4 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 5 {% endcomment %}
+                <tr class="sdg" style="background-color: #EF3E2A;">
+                    <td>SDG 5</td>
+                    <td>Achieve gender equality and empower all and girls</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_5 %}
+                    <tr>
+                        <td>SDGs 5.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_5 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 6 {% endcomment %}
+                <tr class="sdg" style="background-color: #00ADD9;">
+                    <td>SDG 6</td>
+                    <td>Ensure availability and sustainable management of water and sanitation for all</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_6 %}
+                    <tr>
+                        <td>SDGs 6.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_6 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 7 {% endcomment %}
+                <tr class="sdg" style="background-color: #FCB615;">
+                    <td>SDG 7</td>
+                    <td>Ensure access to affordable, reliable, sustainable and modern energy for all</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_7 %}
+                    <tr>
+                        <td>SDGs 7.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_7 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 8 {% endcomment %}
+                <tr class="sdg" style="background-color: #8E1737;">
+                    <td>SDG 8</td>
+                    <td>Promote sustained, inclusive and sustainable economic growth, full and productive employment and decent work for all</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_8 %}
+                    <tr>
+                        <td>SDGs 8.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_8 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 9 {% endcomment %}
+                <tr class="sdg" style="background-color: #F36C24;">
+                    <td>SDG 9</td>
+                    <td>Build resilient infrastructure, promote inclusive and sustainable industrialization and foster innovation</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_9 %}
+                    <tr>
+                        <td>SDGs 9.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_9 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 10 {% endcomment %}
+                <tr class="sdg" style="background-color: #E11584;">
+                    <td>SDG 10</td>
+                    <td>Reduce inequality within and among countries</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_10 %}
+                    <tr>
+                        <td>SDGs 10.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_10 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 11 {% endcomment %}
+                <tr class="sdg" style="background-color: #F89C24;">
+                    <td>SDG 11</td>
+                    <td>Make cities and human settlements inclusive, safe, resilient and sustainable</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_11 %}
+                    <tr>
+                        <td>SDGs 11.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_11 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 12 {% endcomment %}
+                <tr class="sdg" style="background-color: #CF8D29;">
+                    <td>SDG 12</td>
+                    <td>Ensure sustainable consumption and production patterns</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_12 %}
+                    <tr>
+                        <td>SDGs 12.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_12 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 13 {% endcomment %}
+                <tr class="sdg" style="background-color: #46763B;">
+                    <td>SDG 13</td>
+                    <td>Take urgent action to combat climate change and its impacts</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_13 %}
+                    <tr>
+                        <td>SDGs 13.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_13 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 14 {% endcomment %}
+                <tr class="sdg" style="background-color: #007CBB;">
+                    <td>SDG 14</td>
+                    <td>Conserve and sustainably use the oceans, seas and marine resources for sustainable development</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_14 %}
+                    <tr>
+                        <td>SDGs 14.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_14 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 15 {% endcomment %}
+                <tr class="sdg" style="background-color: #3EAF49;">
+                    <td>SDG 15</td>
+                    <td>Protect, restore and promote sustainable use of terrestrial ecosystems, sustainably manage forests, combat desertification, and halt and reverse land degradation and halt biodiversity loss</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_15 %}
+                    <tr>
+                        <td>SDGs 15.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_15 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 16 {% endcomment %}
+                <tr class="sdg" style="background-color: #01558A;">
+                    <td>SDG 16</td>
+                    <td>Promote peaceful and inclusive societies for sustainable development, provide access to justice for all and build effective, accountable and inclusive institutions at all levels</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_16 %}
+                    <tr>
+                        <td>SDGs 16.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_16 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+
+                {% comment %} SDG 17 {% endcomment %}
+                <tr class="sdg" style="background-color: #183567;">
+                    <td>SDG 17</td>
+                    <td>Strengthen the means of implementation and revitalize the global partnership for sustainable development</td>
+                    <td colspan="{{len_years}}"></td>
+                </tr>
+                {% for indicator in indicators_17 %}
+                    <tr>
+                        <td>SDGs 17.{{forloop.counter }}
+                        <td>{{ indicator.indicator_name }}</td>
+                        {% for year in years %}
+                        <td>
+                            {% for performance in performance_17 %}
+                                {% if performance.indicator_id.id == indicator.id and performance.year == year %}
+                                    {{ performance.value }}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endblock content %}
+        <div class="signature">
+            Sustainable Development Report &copy; {{ current_year }}
+        </div>
+    </div>
+</body>

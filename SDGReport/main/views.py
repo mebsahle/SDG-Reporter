@@ -1,6 +1,6 @@
 #  import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 #  import redirect, reverse, reverse_lazy
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, reverse, render
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -387,3 +387,64 @@ class PerformanceCreateView(LoginRequiredMixin, TemplateView):
         )
         print("performance", performance)
         return redirect('performance_detail', id=indicator.indicator_goal.id, pk=id)
+
+
+class ReportView(LoginRequiredMixin, TemplateView):
+    template_name = 'home/report.html'
+    def get(self, request, *args, **kwargs):
+        url = self.request.path
+        country = Country.objects.first()
+        context = {}
+        # indicator = Indicator.objects.get(id=id)
+        # performance = Performance.objects.filter(indicator_id=indicator)
+        context['current_year'] = datetime.now().year
+        p_year = [int(i) for i in range(datetime.now().year, 2015-1, -1)][::-1]
+        context['years'] = p_year
+        context['len_years'] = len(p_year)
+        # print(Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=1)))
+        context['indicator_number'] = [i.indicator_name.split()[0] for i in list(Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=1)))]
+        # print("numbers", context['indicator_number'])
+        context['indicators_1'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=1))
+        context['performance_1'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=1))
+        context['indicators_2'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=2))
+        context['performance_2'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=2))
+        context['indicators_3'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=3))
+        context['performance_3'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=3))
+        context['indicators_4'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=4))
+        context['performance_4'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=4))
+        context['indicators_5'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=5))
+        context['performance_5'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=5))
+        context['indicators_6'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=6))
+        context['performance_6'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=6))
+        context['indicators_7'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=7))
+        context['performance_7'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=7))
+        context['indicators_8'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=8))
+        context['performance_8'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=8))
+        context['indicators_9'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=9))
+        context['performance_9'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=9))
+        context['indicators_10'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=10))
+        context['performance_10'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=10))
+        context['indicators_11'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=11))
+        context['performance_11'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=11))
+        context['indicators_12'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=12))
+        context['performance_12'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=12))
+        context['indicators_13'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=13))
+        context['performance_13'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=13))
+        context['indicators_14'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=14))
+        context['performance_14'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=14))
+        context['indicators_15'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=15))
+        context['performance_15'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=15))
+        context['indicators_16'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=16))
+        context['performance_16'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=16))
+        context['indicators_17'] = Indicator.objects.filter(indicator_goal=Goal.objects.get(goal_number=17))
+        context['performance_17'] = Performance.objects.filter(indicator_id__indicator_goal=Goal.objects.get(goal_number=17))
+        return render(request, self.template_name, context)
+        1/0
+        print("performance", performance)
+        data = {
+            'performance': performance,
+            'indicator': indicator
+        }
+        pdf = render_to_pdf('home/pdf.html', data)
+        return HttpResponse(pdf, content_type='application/pdf')
+
